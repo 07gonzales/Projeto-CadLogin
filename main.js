@@ -24,11 +24,28 @@ function salvarUser(){
 
     if(nomeUser){
         dadosLista.push(nomeUser);
-        // console.log(dadosLista);
+        criaLista();
 
         document.getElementById('nomeUser').value = "";
         
     }else {
         alert("Favor, preencher o nome.");
     }
+}
+
+// Função para criar lista de nomes
+
+function criaLista(){
+    let tabela = "<tr><th>Nome</th><th>Açoes</th></tr>";
+    for(let i=0; i <=(dadosLista.length - 1); i++){
+        tabela += "<tr><td>" +dadosLista[i] + "</td><td><button class='btn btn-success'>Editar</button><button class='btn btn-danger' onclick='excluir(this.parentNode.parentNode.rowIndex)'> Excluir</button></td></tr>";
+        document.getElementById('tabela').innerHTML = tabela;
+    }
+}
+
+//Função para excluir o nome da lista
+
+function excluir(i){
+    dadosLista.splice((i - 1), 1);
+    document.getElementById('tabela').deleteRow(i);
 }
